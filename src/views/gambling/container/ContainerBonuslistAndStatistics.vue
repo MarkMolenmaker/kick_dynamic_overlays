@@ -3,10 +3,10 @@ export default {
   name: 'ContainerBonuslistAndStatistics',
   data () {
     return {
-      start_amount: '$ 1,500',
-      running_average_x: '230X',
-      required_average_x: '500X',
-      bonus_count: '26',
+      start_amount: '',
+      running_average_x: '',
+      required_average_x: '',
+      bonus_count: '',
     }
   },
   mounted() {
