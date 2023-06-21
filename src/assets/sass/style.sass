@@ -1,0 +1,57 @@
+@font-face
+  font-family: 'TheBoldFont'
+  src: url('~@/assets/fonts/theboldfont.ttf') format('truetype')
+
+@font-face
+    font-family: 'BigNoodleTitling'
+    src: url('~@/assets/fonts/big_noodle_titling.ttf') format('truetype')
+
+@font-face
+  font-family: 'BigNoodleTitling'
+  font-style: italic
+  src: url('~@/assets/fonts/big_noodle_titling_oblique.ttf') format('truetype')
+
+@import variables
+
+html, body, router-view, #app
+  margin: 0
+  padding: 0
+  width: 100%
+  height: 100%
+  font-family: 'Avenir', Helvetica, Arial, sans-serif
+
+.bg
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  box-sizing: border-box
+  width: 100%
+  height: 100%
+  background: transparent
+.bg-blue
+  background: radial-gradient(#222e56, #0c1330)
+
+.bg-logo
+  position: absolute
+  display: block
+  width: auto
+  height: auto
+  max-width: 100%
+  max-height: 100%
+  aspect-ratio: 1 / 1
+  opacity: 0.1
+
+.tp-1
+  border-top: 5px solid
+  border-image: $gradient-gold-1 1
+.tp-2
+  border-top: 5px solid
+  border-image: $gradient-gold-2 1
+
+.bt-1
+  border-bottom: 5px solid
+  border-image: $gradient-gold-1 1
+.bt-2
+  border-bottom: 5px solid
+  border-image: $gradient-gold-2 1
