@@ -67,7 +67,7 @@ export default {
   background: $gradient-gold-1
 
 .statistics-container
-  width: 100%
+  width: calc(100% - 10px)
   display: flex
   gap: 20px
   flex-direction: row
