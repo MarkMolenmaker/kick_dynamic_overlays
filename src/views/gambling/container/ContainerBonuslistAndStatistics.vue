@@ -3,35 +3,33 @@ export default {
   name: 'ContainerBonuslistAndStatistics',
   data () {
     return {
-      bonus_hunt: null,
-      start_cost: '',
-      average_current_multi: '',
-      average_required_multi: '',
-      bonus_count: '',
+      bonus_hunt: null
     }
   },
   computed: {
     _start_cost () {
-      if (this.start_cost === '' || this.start_cost === '$ 0') return '-'
-      return `${this.start_cost}`
+      const value = this.bonus_hunt.info_start_cost
+      if (value === '' || value === '$ 0') return '-'
+      return `${value}`
     },
     _average_current_multi () {
-      const value = this.average_current_multi.split('.')[0]
+      const value = this.bonus_hunt.info_running_average.split('.')[0]
       if (value === '' || value === '0') return '-'
       return `${value} X`
     },
     _average_required_multi () {
-      const value = this.average_required_multi.split('.')[0]
+      const value = this.bonus_hunt.info_required_average.split('.')[0]
       if (value === '' || value === '0') return '-'
       return `${value} X`
     },
     _bonus_count () {
-      return `${this.bonus_count}`
+      return `${this.bonus_hunt.bonuses.length}`
     },
   },
   mounted() {
     /* Auto Update values */
     this.fetchValues()
+
     setInterval(() => {
       this.fetchValues()
     }, 5000)
@@ -41,7 +39,7 @@ export default {
     setInterval(() => {
       const wrapper = this.$refs.wrapper
       const bonuslist = this.$refs.bonuslist
-      if (this.bonus_hunt.bonuses.length === 0) return
+      if (this.bonus_hunt === null || this.bonus_hunt.bonuses.length === 0) return
 
       const rows = Math.floor(wrapper.clientHeight / (bonuslist.clientHeight / (this.bonus_hunt.bonuses.length + 1)))
       let scrollOffset = (bonuslist.clientHeight / (this.bonus_hunt.bonuses.length + 1)) * (rows + scrollPosition)
@@ -62,42 +60,20 @@ export default {
   },
   methods: {
     fetchValues() {
-      const API_URL = 'https://bht-scrapi-markmolenmaker.koyeb.app/statistic/'
-      // const API_URL = 'http://127.0.0.1:8000/statistic/'
+      // const API_URL = 'https://bht-scrapi-markmolenmaker.koyeb.app/statistic/'
+      const API_URL = 'http://127.0.0.1:8000/statistic/'
       fetch(API_URL + 'bonus_list')
         .then(response => response.json())
-        .then(json => {
-          this.bonus_hunt = json
-        })
-      fetch(API_URL + 'start_cost')
-        .then(response => response.json())
-        .then(json => {
-          this.start_cost = json.value
-        })
-      fetch(API_URL + 'average_current_multi')
-          .then(response => response.json())
-          .then(json => {
-            this.average_current_multi = json.value
-          })
-      fetch(API_URL + 'average_required_multi')
-          .then(response => response.json())
-          .then(json => {
-            this.average_required_multi = json.value
-          })
-      fetch(API_URL + 'bonus_count')
-          .then(response => response.json())
-          .then(json => {
-            this.bonus_count = json.value
-          })
+        .then(json => this.bonus_hunt = json)
     }
   }
 }
 </script>
 
 <template>
-  <div class="bg bg-blue tp-1 bt-1">
+  <div class="bg bg-blue tp-1 bt-1" v-if="this.bonus_hunt">
     <div class="wrapper" ref="wrapper">
-      <table class="bonuslist" v-if="this.bonus_hunt && this.bonus_hunt.bonuses.length > 0" ref="bonuslist">
+      <table class="bonuslist" v-if="this.bonus_hunt.bonuses.length > 0" ref="bonuslist">
         <tr class="bonus">
           <th>#</th>
           <th class="slot">Slot</th>
@@ -110,7 +86,7 @@ export default {
         </tr>
       </table>
     </div>
-    <div class="divider" v-if="this.bonus_hunt && this.bonus_hunt.bonuses.length > 0"/>
+    <div class="divider" v-if="this.bonus_hunt.bonuses.length > 0"/>
     <div class="statistics-container">
       <div class="statistics-section">
         <div class="statistics-row">
