@@ -3,7 +3,7 @@ export default {
   name: 'ContainerBonuslistAndStatistics',
   data () {
     return {
-      bonus_list: [],
+      bonus_hunt: null,
       start_cost: '',
       average_current_multi: '',
       average_required_multi: '',
@@ -41,12 +41,13 @@ export default {
     setInterval(() => {
       const wrapper = this.$refs.wrapper
       const bonuslist = this.$refs.bonuslist
+      if (this.bonus_hunt.bonuses.length === 0) return
 
-      const rows = Math.floor(wrapper.clientHeight / (bonuslist.clientHeight / (this.bonus_list.length + 1)))
-      let scrollOffset = (bonuslist.clientHeight / (this.bonus_list.length + 1)) * (rows + scrollPosition)
+      const rows = Math.floor(wrapper.clientHeight / (bonuslist.clientHeight / (this.bonus_hunt.bonuses.length + 1)))
+      let scrollOffset = (bonuslist.clientHeight / (this.bonus_hunt.bonuses.length + 1)) * (rows + scrollPosition)
 
       scrollPosition += rows
-      if (scrollPosition >= this.bonus_list.length) {
+      if (scrollPosition >= this.bonus_hunt.bonuses.length) {
         scrollPosition = 0
         scrollOffset = 0
       }
@@ -62,10 +63,11 @@ export default {
   methods: {
     fetchValues() {
       const API_URL = 'https://bht-scrapi-markmolenmaker.koyeb.app/statistic/'
+      // const API_URL = 'http://127.0.0.1:8000/statistic/'
       fetch(API_URL + 'bonus_list')
         .then(response => response.json())
         .then(json => {
-          this.bonus_list = json.value
+          this.bonus_hunt = json
         })
       fetch(API_URL + 'start_cost')
         .then(response => response.json())
@@ -87,12 +89,6 @@ export default {
           .then(json => {
             this.bonus_count = json.value
           })
-    },
-    htmlDecode(input){
-      const e = document.createElement('textarea');
-      e.innerHTML = input;
-      // handle case of empty input
-      return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
     }
   }
 }
@@ -101,20 +97,20 @@ export default {
 <template>
   <div class="bg bg-blue tp-1 bt-1">
     <div class="wrapper" ref="wrapper">
-      <table class="bonuslist" v-if="bonus_list.length > 0" ref="bonuslist">
+      <table class="bonuslist" v-if="this.bonus_hunt && this.bonus_hunt.bonuses.length > 0" ref="bonuslist">
         <tr class="bonus">
           <th>#</th>
           <th class="slot">Slot</th>
           <th>Bet</th>
         </tr>
-        <tr class="bonus" v-for="bonus in this.bonus_list" :key="bonus.id" ref="bonuslist_content">
-          <td>{{ bonus.index }}</td>
-          <td class="slot">{{ htmlDecode(bonus.slot) }}</td>
-          <td>{{ bonus.betsize }}</td>
+        <tr class="bonus" v-for="bonus in this.bonus_hunt.bonuses" :key="bonus.id" ref="bonuslist_content">
+          <td>{{ bonus.order }}</td>
+          <td class="slot">{{ bonus.name }}</td>
+          <td>{{ bonus.bet_size }}</td>
         </tr>
       </table>
     </div>
-    <div class="divider" v-if="bonus_list.length > 0"/>
+    <div class="divider" v-if="this.bonus_hunt && this.bonus_hunt.bonuses.length > 0"/>
     <div class="statistics-container">
       <div class="statistics-section">
         <div class="statistics-row">
