@@ -37,27 +37,31 @@ export default {
     }, 5000)
 
     /* Auto Scroll through bonuslist */
+    let scrollPosition = 0
     setInterval(() => {
       const wrapper = this.$refs.wrapper
       const bonuslist = this.$refs.bonuslist
 
-      const rows = Math.floor(wrapper.clientHeight / (bonuslist.clientHeight / bonuslist.childNodes.length))
-      const scrollOffset = (bonuslist.clientHeight / (this.bonus_list.length + 1)) * rows
+      const rows = Math.floor(wrapper.clientHeight / (bonuslist.clientHeight / (this.bonus_list.length + 1)))
+      let scrollOffset = (bonuslist.clientHeight / (this.bonus_list.length + 1)) * (rows + scrollPosition)
 
-      wrapper.scrollBy({
-        top: scrollOffset, behavior: 'smooth'
-      })
-
-      // If reached bottom, scroll to top
-      if (wrapper.scrollTop >= wrapper.scrollHeight - wrapper.clientHeight) {
-        wrapper.scrollTo({ top: 0, behavior: 'smooth' })
+      scrollPosition += rows
+      if (scrollPosition >= this.bonus_list.length) {
+        scrollPosition = 0
+        scrollOffset = 0
       }
+
+      this.$smoothScroll({
+        container: wrapper,
+        scrollTo: scrollOffset,
+        updateHistory: false,
+      })
     }, 3000)
 
   },
   methods: {
     fetchValues() {
-      const API_URL = 'http://127.0.0.1:8000/statistic/'
+      const API_URL = 'https://bht-scrapi-markmolenmaker.koyeb.app/statistic/'
       fetch(API_URL + 'bonus_list')
         .then(response => response.json())
         .then(json => {
@@ -103,7 +107,7 @@ export default {
           <th class="slot">Slot</th>
           <th>Bet</th>
         </tr>
-        <tr class="bonus" v-for="bonus in this.bonus_list" :key="bonus.id">
+        <tr class="bonus" v-for="bonus in this.bonus_list" :key="bonus.id" ref="bonuslist_content">
           <td>{{ bonus.index }}</td>
           <td class="slot">{{ htmlDecode(bonus.slot) }}</td>
           <td>{{ bonus.betsize }}</td>
