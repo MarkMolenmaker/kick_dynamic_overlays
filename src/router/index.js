@@ -27,6 +27,10 @@ const routes = [
 
   { path: '/gambling/container/bonuslist_and_statistics', name: 'gambling_container_bonuslist_and_statistics',
     component: () => import('../views/gambling/container/ContainerBonuslistAndStatistics.vue') },
+  { path: '/gambling/container/bonushunt_opening', name: 'gambling_container_bonushunt_opening',
+    component: () => import('../views/gambling/container/ContainerHuntOpening.vue') },
+  { path: '/gambling/container/bonushunt_opening_current', name: 'gambling_container_bonushunt_opening_current',
+    component: () => import('../views/gambling/container/ContainerHuntOpeningCurrent.vue') },
 ]
 
 const router = createRouter({

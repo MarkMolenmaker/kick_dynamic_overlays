@@ -13,6 +13,8 @@
     <router-link to="/gambling/container">gambling/container</router-link>
     <router-link to="/gambling/container/chat">gambling/container/chat</router-link>
     <router-link to="/gambling/container/bonuslist_and_statistics">gambling/container/bonuslist_and_statistics</router-link>
+    <router-link to="/gambling/container/bonushunt_opening">gambling/container/bonushunt_opening</router-link>
+    <router-link to="/gambling/container/bonushunt_opening_current">gambling/container/bonushunt_opening_current</router-link>
   </div>
 </template>
 
