@@ -1,111 +1,49 @@
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'ContainerBonuslistAndStatistics',
-  data () {
-    return {
-      bonus_hunt: null
-    }
-  },
-  computed: {
-    _start_cost () {
-      const value = this.bonus_hunt.info_start_cost
-      if (value === '' || value === '$ 0') return '-'
-      return `${value}`
-    },
-    _average_current_multi () {
-      const value = this.bonus_hunt.info_running_average.split('.')[0]
-      if (value === '' || value === '0') return '-'
-      return `${value} X`
-    },
-    _average_required_multi () {
-      const value = this.bonus_hunt.info_required_average.split('.')[0]
-      if (value === '' || value === '0') return '-'
-      return `${value} X`
-    },
-    _bonus_count () {
-      return `${this.bonus_hunt.bonuses.length}`
-    },
-  },
-  mounted() {
-    /* Auto Update values */
-    this.fetchValues()
-
-    setInterval(() => {
-      this.fetchValues()
-    }, 5000)
-
-    /* Auto Scroll through bonuslist */
-    let scrollPosition = 0
-    setInterval(() => {
-      const wrapper = this.$refs.wrapper
-      const bonuslist = this.$refs.bonuslist
-      if (this.bonus_hunt === null || this.bonus_hunt.bonuses.length === 0) return
-
-      const rows = Math.floor(wrapper.clientHeight / (bonuslist.clientHeight / (this.bonus_hunt.bonuses.length + 1)))
-      let scrollOffset = (bonuslist.clientHeight / (this.bonus_hunt.bonuses.length + 1)) * (rows + scrollPosition)
-
-      scrollPosition += rows
-      if (scrollPosition >= this.bonus_hunt.bonuses.length) {
-        scrollPosition = 0
-        scrollOffset = 0
-      }
-
-      this.$smoothScroll({
-        container: wrapper,
-        scrollTo: scrollOffset,
-        updateHistory: false,
-      })
-    }, 3000)
-
-  },
-  methods: {
-    fetchValues() {
-      // const API_URL = 'https://bht-scrapi-markmolenmaker.koyeb.app/statistic/'
-      const API_URL = 'http://127.0.0.1:8000/statistic/'
-      fetch(API_URL + 'bonus_list')
-        .then(response => response.json())
-        .then(json => this.bonus_hunt = json)
-    }
-  }
+  computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_list',
+    'start_cost', 'run_avg_multi', 'req_avg_multi']) },
 }
 </script>
 
 <template>
-  <div class="bg bg-blue tp-1 bt-1" v-if="this.bonus_hunt">
+  <div class="bg bg-blue tp-1 bt-1" v-if="loaded">
     <div class="wrapper" ref="wrapper">
-      <table class="bonuslist" v-if="this.bonus_hunt.bonuses.length > 0" ref="bonuslist">
+      <table class="bonuslist" v-if="bonus_count > 0" ref="bonuslist">
         <tr class="bonus">
           <th>#</th>
           <th class="slot">Slot</th>
           <th>Bet</th>
         </tr>
-        <tr class="bonus" v-for="bonus in this.bonus_hunt.bonuses" :key="bonus.id" ref="bonuslist_content">
+        <tr class="bonus" v-for="bonus in bonus_list" :key="bonus.id" ref="bonuslist_content">
           <td>{{ bonus.order }}</td>
           <td class="slot">{{ bonus.name }}</td>
           <td>{{ bonus.bet_size }}</td>
         </tr>
       </table>
     </div>
-    <div class="divider" v-if="this.bonus_hunt.bonuses.length > 0"/>
+    <div class="divider" v-if="bonus_count > 0"/>
     <div class="statistics-container">
       <div class="statistics-section">
         <div class="statistics-row">
           <span class="type">Start</span>
-          <span class="value">{{ this._start_cost }}</span>
+          <span class="value">{{ start_cost }}</span>
         </div>
         <div class="statistics-row">
           <span class="type">AVG X</span>
-          <span class="value">{{ this._average_current_multi }}</span>
+          <span class="value">{{ run_avg_multi }}</span>
         </div>
       </div>
       <div class="statistics-section">
         <div class="statistics-row">
           <span class="type">Bonus Count</span>
-          <span class="value">{{ this._bonus_count }}</span>
+          <span class="value">{{ bonus_count }}</span>
         </div>
         <div class="statistics-row">
           <span class="type">REQ X</span>
-          <span class="value">{{ this._average_required_multi }}</span>
+          <span class="value">{{ req_avg_multi }}</span>
         </div>
       </div>
     </div>
