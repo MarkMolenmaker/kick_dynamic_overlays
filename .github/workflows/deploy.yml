@@ -41,6 +41,10 @@ jobs:
           cache-dependency-path: './package-lock.json'
       - name: Install dependencies
         run: npm install
+      - name: Create .env file
+        run: |
+          touch .env
+          echo VUE_APP_BASE_URL=${{ secrets.VUE_APP_BASE_URL }} >> .env
       - name: Build
         run: npm run build
       - name: Setup Pages
