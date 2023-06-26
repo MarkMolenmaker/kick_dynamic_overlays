@@ -1,0 +1,11 @@
+<script setup />
+
+<template>
+  <div class="bg bg-blue">
+    <img class="bg-logo" src="../../assets/images/dioninsanity_logo_black.png" alt="dioninsanity_logo_black">
+  </div>
+</template>
+
+<style scoped lang="sass">
+</style>
+

@@ -1,20 +1,18 @@
 <template>
   <div class="home">
-    <router-link to="/gambling/background">gambling/background</router-link>
+    <router-link to="/webcam">webcam</router-link>
+    <router-link to="/webcam/overlay">webcam/overlay</router-link>
     <br>
-    <router-link to="/gambling/main">gambling/main</router-link>
-    <router-link to="/gambling/main/overlay">gambling/main/overlay</router-link>
+    <router-link to="/background">background</router-link>
+    <router-link to="/background/animated">background/animated</router-link>
     <br>
-    <router-link to="/gambling/webcam">gambling/webcam</router-link>
-    <router-link to="/gambling/webcam/overlay">gambling/webcam/overlay</router-link>
+    <router-link to="/container">container</router-link>
+    <router-link to="/container/overlay">container/overlay</router-link>
+    <router-link to="/container/chat">container/chat</router-link>
     <br>
-    <router-link to="/gambling/secondary">gambling/secondary</router-link>
-    <br>
-    <router-link to="/gambling/container">gambling/container</router-link>
-    <router-link to="/gambling/container/chat">gambling/container/chat</router-link>
-    <router-link to="/gambling/container/bonuslist_and_statistics">gambling/container/bonuslist_and_statistics</router-link>
-    <router-link to="/gambling/container/bonushunt_opening">gambling/container/bonushunt_opening</router-link>
-    <router-link to="/gambling/container/bonushunt_opening_current">gambling/container/bonushunt_opening_current</router-link>
+    <router-link to="/gambling/widgets/bonus_list">gambling/widgets/bonus_list</router-link>
+    <router-link to="/gambling/widgets/bonus_opening">gambling/widgets/bonus_opening</router-link>
+    <router-link to="/gambling/widgets/current_slot_artwork">gambling/widgets/current_slot_artwork</router-link>
   </div>
 </template>
 

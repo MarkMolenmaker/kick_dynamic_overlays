@@ -4,33 +4,29 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   { path: '/', name: 'home', component: HomeView },
 
-  { path: '/gambling/background', name: 'gambling_background',
-    component: () => import('../views/gambling/background/BackgroundRoot.vue') },
+  { path: '/webcam', name: 'webcam',
+    component: () => import('@/views/webcam/WebcamRoot.vue') },
+  { path: '/webcam/overlay', name: 'webcam_overlay',
+    component: () => import('@/views/webcam/WebcamOverlay.vue') },
 
-  { path: '/gambling/main', name: 'gambling_main',
-    component: () => import('../views/gambling/main/MainRoot.vue') },
-  { path: '/gambling/main/overlay', name: 'gambling_main_overlay',
-    component: () => import('../views/gambling/main/MainOverlay.vue') },
+  { path: '/background', name: 'background',
+    component: () => import('@/views/background/BackgroundRoot.vue') },
+  { path: '/background/animated', name: 'background_animated',
+    component: () => import('@/views/background/BackgroundAnimated.vue') },
 
-  { path: '/gambling/webcam', name: 'gambling_webcam',
-    component: () => import('../views/gambling/webcam/WebcamRoot.vue') },
-  { path: '/gambling/webcam/overlay', name: 'gambling_webcam_overlay',
-    component: () => import('../views/gambling/webcam/WebcamOverlay.vue') },
+  { path: '/container', name: 'container',
+    component: () => import('@/views/container/ContainerRoot.vue') },
+  { path: '/container/overlay', name: 'container_overlay',
+    component: () => import('@/views/container/ContainerOverlay.vue') },
+  { path: '/container/chat', name: 'container_chat',
+    component: () => import('@/views/container/ContainerChat.vue') },
 
-  { path: '/gambling/secondary', name: 'gambling_secondary',
-    component: () => import('../views/gambling/secondary/SecondaryRoot.vue') },
-
-  { path: '/gambling/container', name: 'gambling_container',
-    component: () => import('../views/gambling/container/ContainerRoot.vue') },
-  { path: '/gambling/container/chat', name: 'gambling_container_chat',
-    component: () => import('../views/gambling/container/ContainerChat.vue') },
-
-  { path: '/gambling/container/bonuslist_and_statistics', name: 'gambling_container_bonuslist_and_statistics',
-    component: () => import('../views/gambling/container/ContainerBonuslistAndStatistics.vue') },
-  { path: '/gambling/container/bonushunt_opening', name: 'gambling_container_bonushunt_opening',
-    component: () => import('../views/gambling/container/ContainerHuntOpening.vue') },
-  { path: '/gambling/container/bonushunt_opening_current', name: 'gambling_container_bonushunt_opening_current',
-    component: () => import('../views/gambling/container/ContainerHuntOpeningCurrent.vue') },
+  { path: '/gambling/widgets/bonus_list', name: 'bonus_list',
+    component: () => import('@/views/gambling/widgets/BonusList.vue') },
+  { path: '/gambling/widgets/bonus_opening', name: 'bonus_opening',
+    component: () => import('@/views/gambling/widgets/BonusOpening.vue') },
+  { path: '/gambling/widgets/current_slot_artwork', name: 'current_slot_artwork',
+    component: () => import('@/views/gambling/widgets/CurrentSlotArtwork.vue') },
 ]
 
 const router = createRouter({
