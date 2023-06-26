@@ -7,19 +7,19 @@ import TableStatisticsRow from '@/components/statistics/TableStatisticsRow.vue'
 export default {
   name: 'ContainerHuntOpeningCurrent',
   components: { TableStatisticsRow, TableStatistics, LineDivider },
-  computed: { ...mapGetters(['loaded', 'current_slot_artwork', 'slot_selected', 'bonus_list']) },
+  computed: { ...mapGetters(['loaded', 'current_slot', 'slot_selected']) },
 }
 </script>
 <template>
   <div class="bg bg-blue tp-1 bt-1" v-if="loaded">
-    <span class="title">Chili Heat</span>
+    <span class="title">{{ current_slot.name }}</span>
     <line-divider />
     <table-statistics columns="2">
-      <table-statistics-row type="Betsize" :value="bonus_list[slot_selected - 1].betsize" />
-      <table-statistics-row type="Payout" :value="bonus_list[slot_selected - 1].payout" />
+      <table-statistics-row type="Betsize" :value="current_slot.bet_size" />
+      <table-statistics-row type="Payout" :value="current_slot.payout" />
     </table-statistics>
     <line-divider />
-    <img :src="current_slot_artwork" alt="Artwork">
+    <img :src="current_slot.image" alt="Artwork">
   </div>
 </template>
 

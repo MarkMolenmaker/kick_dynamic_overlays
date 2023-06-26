@@ -1,5 +1,20 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+
+const money = (value) => {
+  return value !== null && value !== undefined
+      && value !== '' && value !== '0' && value !== '0.00'
+      && value !== '$' && value !== '$ 0' && value !== '$ 0.00'
+      ? value : '-'
+}
+
+const multi = (value) => {
+  if (value !== null && value !== undefined) value = value.split('.')[0]
+  return value !== null && value !== undefined
+      && value !== '' && value !== '0' && value !== '0.00'
+      ? value + ' X' : '-'
+}
+
 export default createStore({
   state: {
     bonus_list: null,
@@ -16,32 +31,10 @@ export default createStore({
 
     slot_selected: state => { return state.bonus_list.currentKey },
 
-    start_cost: state => {
-      return state.bonus_list.info_start_cost !== '$ 0' ?
-        state.bonus_list.info_start_cost : '-'
-    },
-    amount_won: state => {
-      return state.bonus_list.info_amount_won !== '$ 0' ?
-        state.bonus_list.info_amount_won : '-'
-    },
-    req_avg_money: state => {
-      return state.bonus_list.info_required_average_number !== '0' ?
-        state.bonus_list.info_required_average_number : '-'
-    },
-    req_avg_multi: state => {
-      const value = state.bonus_list.info_required_average.split('.')[0]
-      if (value === '0') return '-'
-      return value + ' X'
-    },
-    run_avg_money: state => {
-      return state.bonus_list.infobox.running_avg !== '0' ?
-        state.bonus_list.infobox.running_avg : '-'
-    },
-    run_avg_multi: state => {
-      const value = state.bonus_list.info_running_average.split('.')[0]
-      if (value === '0') return '-'
-      return value + ' X'
-    },
+    start_cost: state => { return money(state.bonus_list.info_start_cost) },
+    amount_won: state => { return money(state.bonus_list.info_amount_won) },
+    required_average_x: state => { return multi(state.bonus_list.info_required_average) },
+    current_average_x: state => { return multi(state.bonus_list.info_running_average) },
 
     highest_win_value: state => { return state.bonus_list.highest_payout_value },
     highest_win_slot: state => { return state.bonus_list.highest_payout_name },
@@ -53,7 +46,12 @@ export default createStore({
     highest_multi_betsize: state => { return state.bonus_list.highest_multi_betsize },
     highest_multi_index: state => { return state.bonus_list.highest_multi_index },
 
-    current_slot_artwork: state => { return state.current_slot_artwork.image },
+    current_slot: state => { return {
+      image: state.current_slot_artwork.image,
+      name: state.bonus_list.bonuses[state.bonus_list.currentKey - 1].name,
+      bet_size: money(state.bonus_list.bonuses[state.bonus_list.currentKey - 1].bet_size),
+      payout: money(state.bonus_list.bonuses[state.bonus_list.currentKey - 1].payout),
+    }},
   },
   mutations: {
   },

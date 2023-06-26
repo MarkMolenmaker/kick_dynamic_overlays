@@ -4,7 +4,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'ContainerBonuslistAndStatistics',
   computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_list',
-    'start_cost', 'run_avg_multi', 'req_avg_multi']) },
+    'start_cost', 'current_average_x', 'required_average_x']) },
 }
 </script>
 
@@ -33,7 +33,7 @@ export default {
         </div>
         <div class="statistics-row">
           <span class="type">AVG X</span>
-          <span class="value">{{ run_avg_multi }}</span>
+          <span class="value">{{ current_average_x }}</span>
         </div>
       </div>
       <div class="statistics-section">
@@ -43,7 +43,7 @@ export default {
         </div>
         <div class="statistics-row">
           <span class="type">REQ X</span>
-          <span class="value">{{ req_avg_multi }}</span>
+          <span class="value">{{ required_average_x }}</span>
         </div>
       </div>
     </div>
