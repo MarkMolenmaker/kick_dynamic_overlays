@@ -1,52 +1,47 @@
 <script>
 import { mapGetters } from 'vuex'
+import TableStatistics from "@/components/statistics/TableStatistics.vue";
+import LineDivider from "@/components/LineDivider.vue";
+import TableStatisticsRow from "@/components/statistics/TableStatisticsRow.vue";
 
 export default {
   name: 'ContainerBonuslistAndStatistics',
+  components: {TableStatisticsRow, LineDivider, TableStatistics},
   computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_list',
-    'start_cost', 'current_average_x', 'required_average_x']) },
+    'start_cost', 'current_average_x', 'required_average_x', 'amount_won']) },
+  data() { return { lenis: null, scrollFunc: null } },
+  mounted() {
+
+  },
+  beforeUnmount() {
+
+  }
 }
 </script>
 
 <template>
   <div class="bg bg-blue tp-1 bt-1" v-if="loaded">
     <div class="wrapper" ref="wrapper">
-      <table class="bonuslist" v-if="bonus_count > 0" ref="bonuslist">
+      <table class="bonuslist" v-if="bonus_count > 0" ref="bonus_list">
         <tr class="bonus">
           <th>#</th>
           <th class="slot">Slot</th>
           <th>Bet</th>
         </tr>
-        <tr class="bonus" v-for="bonus in bonus_list" :key="bonus.id" ref="bonuslist_content">
+        <tr class="bonus" v-for="bonus in bonus_list" :key="bonus.id">
           <td>{{ bonus.order }}</td>
           <td class="slot">{{ bonus.name }}</td>
           <td>{{ bonus.bet_size }}</td>
         </tr>
       </table>
     </div>
-    <div class="divider" v-if="bonus_count > 0"/>
-    <div class="statistics-container">
-      <div class="statistics-section">
-        <div class="statistics-row">
-          <span class="type">Start</span>
-          <span class="value">{{ start_cost }}</span>
-        </div>
-        <div class="statistics-row">
-          <span class="type">AVG X</span>
-          <span class="value">{{ current_average_x }}</span>
-        </div>
-      </div>
-      <div class="statistics-section">
-        <div class="statistics-row">
-          <span class="type">Bonus Count</span>
-          <span class="value">{{ bonus_count }}</span>
-        </div>
-        <div class="statistics-row">
-          <span class="type">REQ X</span>
-          <span class="value">{{ required_average_x }}</span>
-        </div>
-      </div>
-    </div>
+    <line-divider :hidden="bonus_count < 1"/>
+    <table-statistics columns="2">
+      <table-statistics-row type="Start" :value="start_cost" />
+      <table-statistics-row type="Bonus Count" :value="bonus_count" />
+      <table-statistics-row type="AVG X" :value="current_average_x" />
+      <table-statistics-row type="REQ X" :value="required_average_x" />
+    </table-statistics>
   </div>
 </template>
 
@@ -65,8 +60,6 @@ export default {
   justify-content: center
   margin-bottom: auto
   overflow-y: scroll
-  scroll-behavior: smooth
-  scroll-snap-type: x mandatory
   -ms-overflow-style: none
   scrollbar-width: none
 .wrapper::-webkit-scrollbar
@@ -83,36 +76,9 @@ table.bonuslist
 
     td.slot
       max-width: 50vw
-      // noinspection CssInvalidPropertyValue
-      text-wrap: nowrap
+      white-space: nowrap
       text-overflow: ellipsis
       overflow: hidden
 
-.divider
-  width: 100%
-  min-height: 5px
-  height: 5px
-  background: $gradient-gold-1
-
-.statistics-container
-  width: calc(100% - 10px)
-  display: flex
-  gap: 20px
-  flex-direction: row
-
-.statistics-section
-  display: flex
-  width: 100%
-  flex-direction: column
-
-.statistics-row
-  display: flex
-  width: 100%
-  flex-direction: row
-  justify-content: space-between
-  span.type
-    color: white
-  span.value
-    color: #2e97ff
 </style>
 
