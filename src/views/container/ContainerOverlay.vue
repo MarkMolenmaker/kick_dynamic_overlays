@@ -1,14 +1,27 @@
-<script setup>
+<script>
+import { useRoute } from 'vue-router'
+export default {
+  name: 'ContainerOverlay',
+  data () {
+    return {
+      title: '',
+      desc: '',
+    }
+  },
+  mounted() {
+    const route = useRoute()
+    this.title = route.query.title
+    this.desc = route.query.desc
+  },
+}
 </script>
 
 <template>
   <div class="bg">
     <div class="gamble-awareness">
-      <span class="gold-shadow">18+</span>
-      <span class="gold">18+</span>
-      <span class="white">BE</span>
-      <span class="white">GAMBLE</span>
-      <span class="white">AWARE</span>
+      <span class="gold-shadow">{{ this.title }}</span>
+      <span class="gold">{{ this.title }}</span>
+      <span class="white">{{ this.desc }}</span>
     </div>
   </div>
 </template>
