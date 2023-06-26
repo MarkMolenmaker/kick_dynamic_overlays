@@ -3,7 +3,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'ContainerHuntOpening',
-  computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_list', 'bonus_progress', 'bonus_selected',
+  computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_list', 'bonus_progress', 'slot_selected',
       'start_cost', 'amount_won', 'run_avg_multi', 'req_avg_multi']) },
 }
 </script>
@@ -14,7 +14,7 @@ export default {
     <div class="divider"/>
     <div class="progress-bar">
       <div class="progress-bar-fill" :style="{ width: bonus_progress + '%' }"/>
-      <span class="progress-bar-info">Bonus: {{ bonus_selected }}</span>
+      <span class="progress-bar-info">Bonus: {{ slot_selected }}</span>
       <span class="progress-bar-info">{{ bonus_progress }}%</span>
       <span class="progress-bar-info">Total: {{ bonus_count }}</span>
     </div>

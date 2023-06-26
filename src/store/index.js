@@ -11,9 +11,10 @@ export default createStore({
 
     bonus_list: state => { return state.bonus_list.bonuses },
     bonus_count: state => { return state.bonus_list.bonuses.length },
-    bonus_selected: state => { return state.bonus_list.currentKey },
     bonus_progress: state => { return Math.round(state.bonus_list.currentKey
       / state.bonus_list.bonuses.length * 100) },
+
+    slot_selected: state => { return state.bonus_list.currentKey },
 
     start_cost: state => {
       return state.bonus_list.info_start_cost !== '$ 0' ?
