@@ -83,6 +83,7 @@ table.bonuslist
 
     td.slot
       max-width: 50vw
+      // noinspection CssInvalidPropertyValue
       text-wrap: nowrap
       text-overflow: ellipsis
       overflow: hidden

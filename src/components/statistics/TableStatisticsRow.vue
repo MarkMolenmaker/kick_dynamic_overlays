@@ -27,6 +27,7 @@ export default {
   width: 100%
   flex-direction: row
   justify-content: space-between
+  // noinspection CssInvalidPropertyValue
   text-wrap: nowrap
   span
     font-size: 14px
