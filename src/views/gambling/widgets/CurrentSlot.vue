@@ -5,7 +5,7 @@ import TableStatistics from '@/components/statistics/TableStatistics.vue'
 import TableStatisticsRow from '@/components/statistics/TableStatisticsRow.vue'
 
 export default {
-  name: 'ContainerHuntOpeningCurrent',
+  name: 'CurrentSlot',
   components: { TableStatisticsRow, TableStatistics, LineDivider },
   computed: { ...mapGetters(['loaded', 'current_slot', 'slot_selected']) },
 }

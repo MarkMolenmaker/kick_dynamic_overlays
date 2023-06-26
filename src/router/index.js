@@ -26,7 +26,7 @@ const routes = [
   { path: '/gambling/widgets/bonus_opening', name: 'bonus_opening',
     component: () => import('@/views/gambling/widgets/BonusOpening.vue') },
   { path: '/gambling/widgets/current_slot_artwork', name: 'current_slot_artwork',
-    component: () => import('@/views/gambling/widgets/CurrentSlotArtwork.vue') },
+    component: () => import('@/views/gambling/widgets/CurrentSlot.vue') },
 ]
 
 const router = createRouter({
