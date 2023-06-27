@@ -3,6 +3,7 @@ import {mapGetters} from "vuex";
 
 export default{
   name: 'BonusList',
+  data () { return { scrollInterval: null } },
   props: {
     showActive: { type: Boolean, default: false },
     showPayout: { type: Boolean, default: false }
@@ -12,7 +13,25 @@ export default{
     gridTemplateColumns: function () {
       return this.showPayout ? '40px 1fr 70px 70px' : '40px 1fr 70px'
     }
-  }
+  },
+  mounted () {
+    const wrapper = this.$refs.wrapper
+    this.scrollInterval = setInterval(() => {
+      if (wrapper.scrollHeight === wrapper.clientHeight) return
+      wrapper.scrollBy({
+        top: 1,
+        behavior: 'auto'
+      })
+
+      // If we've reached the bottom, move the first child to the end so we can keep scrolling
+      if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight) {
+        const fragment = document.createDocumentFragment()
+        fragment.appendChild(wrapper.firstElementChild)
+        wrapper.appendChild(fragment)
+      }
+    }, 75)
+  },
+  beforeUnmount() { clearInterval(this.scrollInterval) }
 }
 </script>
 
@@ -21,7 +40,7 @@ export default{
       <tr class="bonus" :style="{ gridTemplateColumns: this.gridTemplateColumns }">
         <th>#</th><th class="slot">Slot</th><th>Bet</th><th v-if="this.showPayout">Payout</th>
       </tr>
-      <tbody class="wrapper">
+      <tbody class="wrapper" ref="wrapper">
         <tr class="bonus" :class="{active: bonus(index).active && this.showActive}"
             :style="{ gridTemplateColumns: this.gridTemplateColumns }"
             v-for="index in bonus_count" :key="bonus(index).id">
