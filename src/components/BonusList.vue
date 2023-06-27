@@ -17,13 +17,13 @@ export default{
   mounted () {
     const wrapper = this.$refs.wrapper
     this.scrollInterval = setInterval(() => {
+      // If the wrapper is the same size as the content, we don't need to scroll
       if (wrapper.scrollHeight === wrapper.clientHeight) return
-      wrapper.scrollBy({
-        top: 1,
-        behavior: 'auto'
-      })
 
-      // If we've reached the bottom, move the first child to the end so we can keep scrolling
+      // Scroll down 1px
+      wrapper.scrollBy({ top: 1, behavior: 'auto' })
+
+      // If we've reached the bottom, move the first child to the end, so we can keep scrolling
       if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight) {
         const fragment = document.createDocumentFragment()
         fragment.appendChild(wrapper.firstElementChild)
