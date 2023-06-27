@@ -19,7 +19,7 @@ export default {
     <line-divider :hidden="bonus_count < 1"/>
     <table-statistics columns="2">
       <table-statistics-row type="Start" :value="start_cost" />
-      <table-statistics-row type="Bonus Count" :value="bonus_count" />
+      <table-statistics-row type="Bonus Count" :value="String(bonus_count)" />
       <table-statistics-row type="AVG X" :value="current_average_x" />
       <table-statistics-row type="REQ X" :value="required_average_x" />
     </table-statistics>
