@@ -3,10 +3,11 @@ import { mapGetters } from 'vuex'
 import LineDivider from "@/components/LineDivider.vue";
 import TableStatistics from "@/components/statistics/TableStatistics.vue";
 import TableStatisticsRow from "@/components/statistics/TableStatisticsRow.vue";
+import ProgressBar from "@/components/ProgressBar.vue";
 
 export default {
   name: 'ContainerHuntOpening',
-  components: {TableStatisticsRow, TableStatistics, LineDivider},
+  components: {ProgressBar, TableStatisticsRow, TableStatistics, LineDivider},
   computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_list', 'bonus_progress', 'slot_selected',
       'start_cost', 'amount_won', 'current_average_x', 'required_average_x']) },
 }
@@ -16,12 +17,8 @@ export default {
   <div class="bg bg-blue tp-1 bt-1" v-if="loaded">
     <span class="title">Bonus Opening</span>
     <line-divider />
-    <div class="progress-bar">
-      <div class="progress-bar-fill" :style="{ width: bonus_progress + '%' }"/>
-      <span class="progress-bar-info">Bonus: {{ slot_selected }}</span>
-      <span class="progress-bar-info">{{ bonus_progress }}%</span>
-      <span class="progress-bar-info">Total: {{ bonus_count }}</span>
-    </div>
+    <progress-bar :left-text="'Bonus: ' + slot_selected" :middle-text="bonus_progress + '%'"
+                  :progress="bonus_progress" :right-text="'Total: ' + bonus_count" />
     <line-divider />
     <div class="wrapper" ref="wrapper">
       <table class="bonuslist" v-if="bonus_count > 0" ref="bonuslist">
@@ -54,26 +51,6 @@ export default {
 .bg
   display: flex
   flex-direction: column
-
-.progress-bar
-  position: relative
-  width: 100%
-  height: 30px
-  display: flex
-  flex-direction: row
-  align-items: center
-  justify-content: space-between
-
-.progress-bar-fill
-  position: absolute
-  left: 0
-  height: 100%
-  background: #2e97ff
-
-.progress-bar-info
-  color: white
-  z-index: 1
-  margin: 0 10px
 
 .wrapper
   width: 100%
