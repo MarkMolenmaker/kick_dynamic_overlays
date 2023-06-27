@@ -3,8 +3,8 @@ export default {
   name: 'TableStatistics',
   props: {
     columns: {
-      type: Number,
-      default: 1
+      type: String,
+      default: '1'
     }
   }
 }
