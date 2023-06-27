@@ -2,10 +2,10 @@ import { createStore } from 'vuex'
 import axios from 'axios'
 
 const money = (value) => {
-  return value !== null && value !== undefined
-      && value !== '' && value !== '0' && value !== '0.00'
-      && value !== '$' && value !== '$ 0' && value !== '$ 0.00'
-      ? value : '-'
+  if (value === null || value === undefined) return '-'
+  if (value === '' || value === '0' || value === '0.00' || value === '$' || value === 0
+      || value === '$ 0' || value === '$ 0.00') return '-'
+  return value.length > 7 ? value.split('.')[0] : value
 }
 
 const multi = (value) => {
@@ -24,7 +24,14 @@ export default createStore({
     loaded: state => { return state.bonus_list != null &&
       state.current_slot_artwork != null },
 
-    bonus_list: state => { return state.bonus_list.bonuses },
+    bonus: (state) => {
+      return (index) => {
+        const bonus = state.bonus_list.bonuses[index - 1]
+        bonus.bet_size = money(bonus.bet_size)
+        bonus.payout = money(bonus.payout)
+        return bonus
+      }
+    },
     bonus_count: state => { return state.bonus_list.bonuses.length },
     bonus_progress: state => { return Math.round(state.bonus_list.currentKey
       / state.bonus_list.bonuses.length * 100) },
