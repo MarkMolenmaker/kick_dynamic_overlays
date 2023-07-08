@@ -13,6 +13,8 @@
     <router-link to="/gambling/widgets/bonus_list">gambling/widgets/bonus_list</router-link>
     <router-link to="/gambling/widgets/bonus_opening">gambling/widgets/bonus_opening</router-link>
     <router-link to="/gambling/widgets/current_slot_artwork">gambling/widgets/current_slot_artwork</router-link>
+    <br>
+    <router-link to="/alerts">alerts</router-link>
   </div>
 </template>
 
