@@ -2,7 +2,7 @@
 
 <template>
   <div class="bg bg-blue tp-1 bt-1">
-    <iframe src="https://botrix.live/widgets/chat/?bid=URj7ctdxxSlywsokPlx2bA&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=16&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent"></iframe>
+    <iframe :src="process.env.BOTRIX_CHAT_WIDGET_URL"></iframe>
   </div>
 </template>
 
