@@ -1,17 +1,11 @@
 <script>
 export default {
-  name: 'LineDivider',
-  props: {
-    hidden: {
-      type: Boolean,
-      default: false
-    }
-  }
+  name: 'LineDivider'
 }
 </script>
 
 <template>
-  <div class="divider" :hidden="this.hidden"/>
+  <div class="divider" />
 </template>
 
 <style scoped lang="sass">

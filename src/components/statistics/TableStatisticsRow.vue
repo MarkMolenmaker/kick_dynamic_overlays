@@ -27,11 +27,6 @@ export default {
   width: 100%
   flex-direction: row
   justify-content: space-between
-  // noinspection CssInvalidPropertyValue
-  text-wrap: nowrap
-  span
-    font-size: 14px
-    line-height: 24px
   span.table-statistics-row-type
     color: white
   span.table-statistics-row-value
