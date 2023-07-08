@@ -1,9 +1,8 @@
 <script setup>
-
 </script>
 
 <template>
-  <iframe src="https://botrix.live/alerts?bid=URj7ctdxxSlywsokPlx2bA" frameborder="0"></iframe>
+  <iframe :src="process.env.BOTRIX_ALERTS_URL" frameborder="0"></iframe>
 </template>
 
 <style scoped lang="sass">
