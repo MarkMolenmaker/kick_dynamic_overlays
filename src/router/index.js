@@ -11,6 +11,8 @@ const routes = [
 
   { path: '/background', name: 'background',
     component: () => import('@/views/background/BackgroundRoot.vue') },
+  { path: '/background/styled', name: 'background_styled',
+    component: () => import('@/views/background/BackgroundStyled.vue') },
   { path: '/background/animated', name: 'background_animated',
     component: () => import('@/views/background/BackgroundAnimated.vue') },
 

@@ -4,6 +4,7 @@
     <router-link to="/webcam/overlay">webcam/overlay</router-link>
     <br>
     <router-link to="/background">background</router-link>
+    <router-link to="/background/styled">background/styled</router-link>
     <router-link to="/background/animated">background/animated</router-link>
     <br>
     <router-link to="/container">container</router-link>
