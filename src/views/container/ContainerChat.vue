@@ -3,12 +3,11 @@ import {useRoute} from "vue-router";
 
 export default {
   name: 'ContainerChat',
-  data () { return { fontSize: 16 } },
-  computed: { url () { return process.env.VUE_APP_BOTRIX_CHAT_URL + this.fontSize } },
-  mounted() {
+  computed: { url () {
     const route = useRoute()
-    this.fontSize = route.query.fontSize ? route.query.fontSize : 16
-  }
+    const fontSize = route.query.fontSize ? route.query.fontSize : 16
+    return `${process.env.VUE_APP_BOTRIX_CHAT_URL}${fontSize}`
+  } },
 }
 </script>
 
