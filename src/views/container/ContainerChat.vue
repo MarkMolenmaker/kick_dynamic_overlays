@@ -7,6 +7,7 @@ export default {
   mounted () {
     const route = useRoute()
     const fontSize = route.query.fontSize
+    // @NOTE: Edit SRC for account
     switch (fontSize) {
       case 'large':
         this.src = 'https://botrix.live/widgets/chat/?bid=2QA6EfEf2MUVSCPH2kd%2FBw&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=22&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
