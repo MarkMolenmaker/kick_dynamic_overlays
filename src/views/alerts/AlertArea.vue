@@ -1,8 +1,13 @@
-<script setup>
+<script>
+export default {
+  name: 'AlertArea',
+  computed: { url () { return process.env.VUE_APP_BOTRIX_ALERTS_URL } },
+}
+
 </script>
 
 <template>
-  <iframe :src="process.env.BOTRIX_ALERTS_URL" frameborder="0"></iframe>
+  <iframe :src="this.url" frameborder="0"></iframe>
 </template>
 
 <style scoped lang="sass">

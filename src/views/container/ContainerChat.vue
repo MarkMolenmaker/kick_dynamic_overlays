@@ -1,8 +1,20 @@
-<script setup />
+<script>
+import {useRoute} from "vue-router";
+
+export default {
+  name: 'ContainerChat',
+  data () { return { fontSize: 16 } },
+  computed: { url () { return process.env.VUE_APP_BOTRIX_CHAT_URL + this.fontSize } },
+  mounted() {
+    const route = useRoute()
+    this.fontSize = route.query.fontSize ? route.query.fontSize : 16
+  }
+}
+</script>
 
 <template>
   <div class="bg bg-blue tp-1 bt-1">
-    <iframe :src="process.env.BOTRIX_CHAT_WIDGET_URL"></iframe>
+    <iframe :src="this.url"></iframe>
   </div>
 </template>
 
