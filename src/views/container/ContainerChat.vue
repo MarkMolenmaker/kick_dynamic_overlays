@@ -6,7 +6,9 @@ export default {
   computed: { url () {
     const route = useRoute()
     const fontSize = route.query.fontSize ? route.query.fontSize : 16
-    return `${process.env.VUE_APP_BOTRIX_CHAT_URL}${fontSize}`
+    return `${process.env.VUE_APP_BOTRIX_CHAT_URL}&bots=true&emojis=true&hideCommands=true&hideMessages=false
+      &hideMessagesSeconds=10&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent
+      &fontSize=${fontSize}`
   } },
 }
 </script>
