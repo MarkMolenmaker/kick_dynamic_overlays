@@ -30,6 +30,9 @@ const routes = [
 
   { path: '/alerts', name: 'alerts',
     component: () => import('@/views/alerts/AlertArea.vue') },
+
+  { path: '/banners', name: 'banners',
+    component: () => import('@/views/banners/BannersRoot.vue') },
 ]
 
 const router = createRouter({

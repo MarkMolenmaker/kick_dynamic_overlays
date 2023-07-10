@@ -15,6 +15,8 @@
     <router-link to="/gambling/widgets/current_slot_artwork">gambling/widgets/current_slot_artwork</router-link>
     <br>
     <router-link to="/alerts">alerts</router-link>
+    <br>
+    <router-link to="/banners">banners</router-link>
   </div>
 </template>
 
