@@ -9,7 +9,7 @@ export default{
     showPayout: { type: Boolean, default: false }
   },
   computed: {
-    ...mapGetters(['bonus_count', 'bonus']),
+    ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected']),
     gridTemplateColumns: function () {
       return this.showPayout ? '40px 1fr 70px 70px' : '40px 1fr 70px'
     }
@@ -24,6 +24,27 @@ export default{
     this.scrollInterval = setInterval(() => {
       // If the wrapper is the same size as the content, we don't need to scroll
       if (wrapper.scrollHeight === wrapper.clientHeight) return
+
+      // Check if we need to scroll to the selected bonus
+      if (this.is_opening) {
+        // Get the position of the selected bonus
+        const index = this.slot_selected
+
+        // Get the amount of rows in the wrapper
+        const rows = wrapper.children.length
+
+        // Get the height of a single row
+        const rowHeight = wrapper.scrollHeight / rows
+
+        // Calculate the position of the selected bonus
+        const position = rowHeight * (index - 1)
+
+        // If the selected bonus is already on top, we don't need to scroll
+        if (wrapper.scrollTop === position) return
+
+        // Scroll to the selected bonus
+        wrapper.scrollTo({ top: position, behavior: 'smooth' })
+      }
 
       // Scroll down 1px
       wrapper.scrollBy({ top: 1, behavior: 'auto' })

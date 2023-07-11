@@ -38,6 +38,7 @@ export default createStore({
       / state.bonus_list.bonuses.length * 100) },
 
     slot_selected: state => { return state.bonus_list.currentKey },
+    is_opening: state => { return state.bonus_list.isRedeeming === 1 },
 
     start_cost: state => { return money(state.bonus_list.info_start_cost) },
     amount_won: state => { return money(state.bonus_list.info_amount_won) },
