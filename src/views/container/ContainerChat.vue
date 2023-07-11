@@ -10,19 +10,19 @@ export default {
     // @NOTE: Edit SRC for account
     switch (fontSize) {
       case 'large':
-        this.src = 'https://botrix.live/widgets/chat/?bid=2QA6EfEf2MUVSCPH2kd%2FBw&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=22&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
+        this.src = 'https://botrix.live/widgets/chat/?bid=URj7ctdxxSlywsokPlx2bA&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=22&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
         break
       case 'normal':
-        this.src = 'https://botrix.live/widgets/chat/?bid=2QA6EfEf2MUVSCPH2kd%2FBw&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=16&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
+        this.src = 'https://botrix.live/widgets/chat/?bid=URj7ctdxxSlywsokPlx2bA&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=16&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
         break
       case 'medium':
-        this.src = 'https://botrix.live/widgets/chat/?bid=2QA6EfEf2MUVSCPH2kd%2FBw&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=14&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
+        this.src = 'https://botrix.live/widgets/chat/?bid=URj7ctdxxSlywsokPlx2bA&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=14&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
         break
       case 'small':
-        this.src = 'https://botrix.live/widgets/chat/?bid=2QA6EfEf2MUVSCPH2kd%2FBw&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=12&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
+        this.src = 'https://botrix.live/widgets/chat/?bid=URj7ctdxxSlywsokPlx2bA&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=12&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
         break
       default:
-        this.src = 'https://botrix.live/widgets/chat/?bid=2QA6EfEf2MUVSCPH2kd%2FBw&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=16&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
+        this.src = 'https://botrix.live/widgets/chat/?bid=URj7ctdxxSlywsokPlx2bA&bots=true&emojis=true&hideCommands=true&hideMessages=false&hideMessagesSeconds=10&fontSize=16&trovo=false&twitch=false&youtube=false&kick=true&platformIcon=false&theme=transparent'
         break
     }
     this.loaded = true
