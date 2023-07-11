@@ -25,8 +25,8 @@ export default {
     <bonus-list show-active show-payout />
     <line-divider :hidden="bonus_count < 1"/>
     <table-statistics columns="1" v-if="highest_win_value !== null">
-      <table-statistics-row type="Highest Win: " :desc="`${highest_win_slot} (${highest_win_betsize})`" :value="highest_win_value"/>
-      <table-statistics-row type="Highest Multi: " :desc="`${highest_multi_slot} (${highest_multi_betsize})`" :value="highest_multi_value"/>
+      <table-statistics-row center type="Highest Win: " :desc="`${highest_win_slot} (${highest_win_betsize})`" :value="highest_win_value"/>
+      <table-statistics-row center type="Highest Multi: " :desc="`${highest_multi_slot} (${highest_multi_betsize})`" :value="highest_multi_value"/>
     </table-statistics>
     <line-divider v-if="highest_win_value !== null" />
     <table-statistics columns="2">

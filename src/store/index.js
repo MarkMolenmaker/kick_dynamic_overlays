@@ -28,6 +28,14 @@ export default createStore({
     bonus: (state) => {
       return (index) => {
         const bonus = state.bonus_list.bonuses[index - 1]
+
+        bonus.multi = '-'
+        if (bonus.payout !== null && bonus.bet_size !== null) {
+          const payout = Number(bonus.payout.substring(2, bonus.payout.length).replaceAll(',', ''))
+          const bet_size = Number(bonus.bet_size.substring(2, bonus.bet_size.length).replaceAll(',', ''))
+          bonus.multi = multi((payout / bet_size).toFixed(2))
+        }
+
         bonus.bet_size = money(bonus.bet_size)
         bonus.payout = money(bonus.payout)
         return bonus
@@ -38,6 +46,7 @@ export default createStore({
       / state.bonus_list.bonuses.length * 100) },
 
     slot_selected: state => { return state.bonus_list.currentKey },
+    is_opening: state => { return state.bonus_list.isRedeeming === 1 },
 
     start_cost: state => { return money(state.bonus_list.info_start_cost) },
     amount_won: state => { return money(state.bonus_list.info_amount_won) },

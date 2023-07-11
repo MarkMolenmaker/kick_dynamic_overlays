@@ -37,7 +37,7 @@ export default {
   gap: 10px
 
 span
-  font-family: 'BigNoodleTitling', sans-serif
+  font-family: 'Calibri', sans-serif
   font-size: 30px
   text-shadow: black 3px 3px 3px
   text-transform: uppercase
