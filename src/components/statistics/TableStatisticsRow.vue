@@ -6,6 +6,10 @@ export default {
       type: String,
       default: 'Type'
     },
+    desc: {
+      type: String,
+      required: false
+    },
     value: {
       type: String,
       default: '0.00'
@@ -17,6 +21,7 @@ export default {
 <template>
   <div class="table-statistics-row">
     <span class="table-statistics-row-type">{{ type }}</span>
+    <span class="table-statistics-row-desc" v-if="desc !== null && desc !== undefined">{{ desc }}</span>
     <span class="table-statistics-row-value">{{ value }}</span>
   </div>
 </template>

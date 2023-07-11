@@ -34,7 +34,7 @@ export default{
         fragment.appendChild(wrapper.firstElementChild)
         wrapper.appendChild(fragment)
       }
-    }, 75)
+    }, 50)
   },
   beforeUnmount() { clearInterval(this.scrollInterval) }
 }
