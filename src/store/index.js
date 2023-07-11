@@ -31,8 +31,8 @@ export default createStore({
 
         bonus.multi = '-'
         if (bonus.payout !== null && bonus.bet_size !== null) {
-          const payout = Number(bonus.payout.substring(2, bonus.payout.length))
-          const bet_size = Number(bonus.bet_size.substring(2, bonus.bet_size.length))
+          const payout = Number(bonus.payout.substring(2, bonus.payout.length).replaceAll(',', ''))
+          const bet_size = Number(bonus.bet_size.substring(2, bonus.bet_size.length).replaceAll(',', ''))
           bonus.multi = multi((payout / bet_size).toFixed(2))
         }
 
