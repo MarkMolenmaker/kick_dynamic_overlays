@@ -4,6 +4,7 @@
     <router-link to="/webcam/overlay">webcam/overlay</router-link>
     <br>
     <router-link to="/background">background</router-link>
+    <router-link to="/background/styled">background/styled</router-link>
     <router-link to="/background/animated">background/animated</router-link>
     <br>
     <router-link to="/container">container</router-link>
@@ -15,6 +16,8 @@
     <router-link to="/gambling/widgets/current_slot_artwork">gambling/widgets/current_slot_artwork</router-link>
     <br>
     <router-link to="/alerts">alerts</router-link>
+    <br>
+    <router-link to="/banners">banners</router-link>
   </div>
 </template>
 

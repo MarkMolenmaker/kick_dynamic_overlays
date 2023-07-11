@@ -9,8 +9,9 @@ import BonusList from "@/components/BonusList.vue";
 export default {
   name: 'ContainerHuntOpening',
   components: {BonusList, ProgressBar, TableStatisticsRow, TableStatistics, LineDivider},
-  computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_list', 'bonus_progress', 'slot_selected',
-      'start_cost', 'amount_won', 'current_average_x', 'required_average_x']) },
+  computed: { ...mapGetters(['loaded', 'bonus_count', 'bonus_progress', 'slot_selected',
+      'start_cost', 'amount_won', 'current_average_x', 'required_average_x', 'highest_multi_slot', 'highest_win_slot',
+      'highest_multi_betsize', 'highest_win_betsize', 'highest_multi_value', 'highest_win_value' ]) },
 }
 </script>
 
@@ -23,6 +24,11 @@ export default {
     <line-divider />
     <bonus-list show-active show-payout />
     <line-divider :hidden="bonus_count < 1"/>
+    <table-statistics columns="1" v-if="highest_win_value !== null">
+      <table-statistics-row type="Highest Win: " :desc="`${highest_win_slot} (${highest_win_betsize})`" :value="highest_win_value"/>
+      <table-statistics-row type="Highest Multi: " :desc="`${highest_multi_slot} (${highest_multi_betsize})`" :value="highest_multi_value"/>
+    </table-statistics>
+    <line-divider v-if="highest_win_value !== null" />
     <table-statistics columns="2">
       <table-statistics-row type="Start" :value="start_cost" />
       <table-statistics-row type="Winnings" :value="amount_won" />

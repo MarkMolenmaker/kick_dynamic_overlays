@@ -10,6 +10,7 @@ const money = (value) => {
 
 const multi = (value) => {
   if (value !== null && value !== undefined) value = value.split('.')[0]
+  value = value.replaceAll('x', '').trim()
   return value !== null && value !== undefined
       && value !== '' && value !== '0' && value !== '0.00'
       ? value + ' X' : '-'
@@ -43,14 +44,14 @@ export default createStore({
     required_average_x: state => { return multi(state.bonus_list.info_required_average) },
     current_average_x: state => { return multi(state.bonus_list.info_running_average) },
 
-    highest_win_value: state => { return state.bonus_list.highest_payout_value },
+    highest_win_value: state => { return money(state.bonus_list.highest_payout_value) },
     highest_win_slot: state => { return state.bonus_list.highest_payout_name },
-    highest_win_betsize: state => { return state.bonus_list.highest_payout_betsize },
+    highest_win_betsize: state => { return money(state.bonus_list.highest_payout_betsize) },
     highest_win_index: state => { return state.bonus_list.highest_payout_index },
 
-    highest_multi_value: state => { return state.bonus_list.highest_multi_value },
+    highest_multi_value: state => { return multi(state.bonus_list.highest_multi_value) },
     highest_multi_slot: state => { return state.bonus_list.highest_multi_name },
-    highest_multi_betsize: state => { return state.bonus_list.highest_multi_betsize },
+    highest_multi_betsize: state => { return money(state.bonus_list.highest_multi_betsize) },
     highest_multi_index: state => { return state.bonus_list.highest_multi_index },
 
     current_slot: state => { return {
