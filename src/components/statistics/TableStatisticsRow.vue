@@ -17,13 +17,24 @@ export default {
     largeFont: {
       type: Boolean,
       default: false
+    },
+    center: {
+      type: Boolean,
+      default: false
+    }
+  }, computed: {
+    classes() {
+      return {
+        'space-out': !this.center,
+        'center': this.center
+      }
     }
   }
 }
 </script>
 
 <template>
-  <div class="table-statistics-row">
+  <div class="table-statistics-row" :class="classes">
     <span class="table-statistics-row-type" :class="{'large-font': largeFont}">{{ type }}</span>
     <span class="table-statistics-row-desc" :class="{'large-font': largeFont}"
           v-if="desc !== null && desc !== undefined">{{ desc }}</span>
@@ -33,10 +44,7 @@ export default {
 
 <style scoped lang="sass">
 .table-statistics-row
-  display: flex
   width: 100%
-  flex-direction: row
-  justify-content: space-between
   span.table-statistics-row-type
     color: white
   span.table-statistics-row-value
@@ -44,4 +52,15 @@ export default {
   span.large-font
     font-size: 20px
     margin: 3px 0
+.space-out
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+.center
+  display: grid
+  grid-template-columns: 120px 1fr 70px
+  span:first-child
+    justify-self: start
+  span:last-child
+    justify-self: end
 </style>
