@@ -29,6 +29,8 @@ const routes = [
     component: () => import('@/views/gambling/widgets/BonusOpening.vue') },
   { path: '/gambling/widgets/current_slot_artwork', name: 'current_slot_artwork',
     component: () => import('@/views/gambling/widgets/CurrentSlot.vue') },
+  { path: '/gambling/widgets/deposit_withdrawal', name: 'deposit_withdrawal',
+    component: () => import('@/views/gambling/widgets/DepositWithdrawal.vue') },
 
   { path: '/alerts', name: 'alerts',
     component: () => import('@/views/alerts/AlertArea.vue') },
