@@ -27,34 +27,40 @@ export default{
 
       // Check if we need to scroll to the selected bonus
       if (this.is_opening) {
-        // Get the position of the selected bonus
-        const index = this.slot_selected
 
-        // Get the amount of rows in the wrapper
-        const rows = wrapper.children.length
+        // Check if we are in the correct url
+        if (this.$route.path === '/gambling/widgets/bonus_opening') {
 
-        // Get the height of a single row
-        const rowHeight = wrapper.scrollHeight / rows
+          // Get the position of the selected bonus
+          const index = this.slot_selected
 
-        // Calculate the position of the selected bonus
-        const position = rowHeight * (index - 1)
+          // Get the amount of rows in the wrapper
+          const rows = wrapper.children.length
 
-        // If the selected bonus is already on top, we don't need to scroll
-        if (wrapper.scrollTop === position) return
+          // Get the height of a single row
+          const rowHeight = wrapper.scrollHeight / rows
 
-        // Scroll to the selected bonus
-        wrapper.scrollTo({ top: position, behavior: 'smooth' })
+          // Calculate the position of the selected bonus
+          const position = rowHeight * (index - 1) - 1
+
+          // If the selected bonus is already on top, we don't need to scroll
+          if (wrapper.scrollTop === position) return
+
+          // Scroll to the selected bonus
+          wrapper.scrollTo({top: position, behavior: 'smooth'})
+
+        }
       }
+        // Scroll down 1px
+        wrapper.scrollBy({top: 1, behavior: 'auto'})
 
-      // Scroll down 1px
-      wrapper.scrollBy({ top: 1, behavior: 'auto' })
+        // If we've reached the bottom, move the first child to the end, so we can keep scrolling
+        if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight) {
+          const fragment = document.createDocumentFragment()
+          fragment.appendChild(wrapper.firstElementChild)
+          wrapper.appendChild(fragment)
+        }
 
-      // If we've reached the bottom, move the first child to the end, so we can keep scrolling
-      if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight) {
-        const fragment = document.createDocumentFragment()
-        fragment.appendChild(wrapper.firstElementChild)
-        wrapper.appendChild(fragment)
-      }
     }, 50)
   },
   beforeUnmount() { clearInterval(this.scrollInterval) }
