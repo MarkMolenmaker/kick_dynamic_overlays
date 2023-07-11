@@ -14,11 +14,11 @@ export default{
       return this.showPayout ? '40px 1fr 70px 70px' : '40px 1fr 70px'
     }
   },
-  watch: {
-    bonus_count: function () {
-      location.reload()
-    }
-  },
+  // watch: {
+  //   bonus_count: function () {
+  //     location.reload()
+  //   }
+  // },
   mounted () {
     const wrapper = this.$refs.wrapper
     this.scrollInterval = setInterval(() => {
