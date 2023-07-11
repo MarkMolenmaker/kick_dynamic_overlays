@@ -8,14 +8,6 @@ export default{
     showActive: { type: Boolean, default: false },
     showPayout: { type: Boolean, default: false }
   },
-  methods: {
-    multi (bonus) {
-      if (bonus.payout === null || bonus.payout === undefined) return '-'
-      const payout = Number(bonus.payout.substring(2, bonus.payout.length - 1))
-      const bet_size = Number(bonus.bet_size.substring(2, bonus.bet_size.length - 1))
-      return (payout / bet_size).toFixed(2)
-    }
-  },
   computed: {
     ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected']),
     gridTemplateColumns: function () {
@@ -81,7 +73,7 @@ export default{
           <td>{{ index }}</td>
           <td class="slot">{{ bonus(index).name }}</td>
           <td>{{ bonus(index).bet_size }}</td>
-          <td v-if="this.showPayout">{{ multi(bonus) }}</td>
+          <td v-if="this.showPayout">{{ bonus(index).multi }}</td>
           <td v-if="this.showPayout">{{ bonus(index).payout }}</td>
         </tr>
       </tbody>

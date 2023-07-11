@@ -28,6 +28,14 @@ export default createStore({
     bonus: (state) => {
       return (index) => {
         const bonus = state.bonus_list.bonuses[index - 1]
+
+        bonus.multi = '-'
+        if (bonus.payout !== null && bonus.bet_size !== null) {
+          const payout = Number(bonus.payout.substring(2, bonus.payout.length))
+          const bet_size = Number(bonus.bet_size.substring(2, bonus.bet_size.length))
+          bonus.multi = multi((payout / bet_size).toFixed(2))
+        }
+
         bonus.bet_size = money(bonus.bet_size)
         bonus.payout = money(bonus.payout)
         return bonus
