@@ -14,15 +14,20 @@ export default {
       type: String,
       default: '0.00'
     },
+    largeFont: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>
 
 <template>
   <div class="table-statistics-row">
-    <span class="table-statistics-row-type">{{ type }}</span>
-    <span class="table-statistics-row-desc" v-if="desc !== null && desc !== undefined">{{ desc }}</span>
-    <span class="table-statistics-row-value">{{ value }}</span>
+    <span class="table-statistics-row-type" :class="{'large-font': largeFont}">{{ type }}</span>
+    <span class="table-statistics-row-desc" :class="{'large-font': largeFont}"
+          v-if="desc !== null && desc !== undefined">{{ desc }}</span>
+    <span class="table-statistics-row-value" :class="{'large-font': largeFont}">{{ value }}</span>
   </div>
 </template>
 
@@ -36,4 +41,7 @@ export default {
     color: white
   span.table-statistics-row-value
     color: #2e97ff
+  span.large-font
+    font-size: 20px
+    margin: 3px 0
 </style>
