@@ -19,6 +19,7 @@
     <router-link to="/alerts">alerts</router-link>
     <br>
     <router-link to="/banners">banners</router-link>
+    <span>Stable 1.0</span>
   </div>
 </template>
 
