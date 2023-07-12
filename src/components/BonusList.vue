@@ -9,7 +9,7 @@ export default{
     showPayout: { type: Boolean, default: false }
   },
   computed: {
-    ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected']),
+    ...mapGetters(['bonus_count', 'bonus']),//, 'is_opening', 'slot_selected']),
     gridTemplateColumns: function () {
       return this.showPayout ? '40px 1fr 70px 70px 70px' : '40px 1fr 70px'
     }
