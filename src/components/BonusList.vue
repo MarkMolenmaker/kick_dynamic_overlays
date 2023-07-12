@@ -26,24 +26,24 @@ export default{
       if (wrapper.scrollHeight === wrapper.clientHeight) return
 
       // Scroll to selected row in the middle, when opening
-      if (this.is_opening) {
-        if (this.$route.path === '/gambling/widgets/bonus_opening') {
-          const index = this.slot_selected
-          const rows = wrapper.children.length
-          const rowHeight = wrapper.scrollHeight / rows
+      //if (this.is_opening) {
+      //  if (this.$route.path === '/gambling/widgets/bonus_opening') {
+      //    const index = this.slot_selected
+     //     const rows = wrapper.children.length
+      //    const rowHeight = wrapper.scrollHeight / rows
 
           // Get the amount of rows that fit in the visible area
-          const visibleRows = Math.floor(wrapper.clientHeight / rowHeight)
-          const offsetRows = Math.floor(visibleRows / 2)
+       //   const visibleRows = Math.floor(wrapper.clientHeight / rowHeight)
+        //  const offsetRows = Math.floor(visibleRows / 2)
 
-          const position = rowHeight * (index - 1) - offsetRows * rowHeight - 1
+       //   const position = rowHeight * (index - 1) - offsetRows * rowHeight - 1
 
           // If the selected bonus is already on top, we don't need to scroll
-          if (wrapper.scrollTop === position) return
-          wrapper.scrollTo({top: position, behavior: 'smooth'})
-          return
-        }
-      }
+       //   if (wrapper.scrollTop === position) return
+       //   wrapper.scrollTo({top: position, behavior: 'smooth'})
+      //    return
+     //   }
+     // }
 
       // Scroll down 1px
       wrapper.scrollBy({top: 1, behavior: 'auto'})
