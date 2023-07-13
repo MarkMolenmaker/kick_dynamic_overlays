@@ -9,10 +9,7 @@ const money = (value) => {
 }
 
 const multi = (value) => {
-  if (value === null || value === undefined) return '-'
-  value = value.replaceAll('x', '').replaceAll('X', '').trim()
-  if (value === '' || value === '0' || value === '0.00' || value === 0) return '-'
-  return value + ' X'
+  return value // @TODO: Find the memoryleak
 }
 
 export default createStore({
