@@ -9,11 +9,10 @@ const money = (value) => {
 }
 
 const multi = (value) => {
-  if (value !== null && value !== undefined) value = value.split('.')[0]
-  value = value.replaceAll('x', '').trim()
-  return value !== null && value !== undefined
-      && value !== '' && value !== '0' && value !== '0.00'
-      ? value + ' X' : '-'
+  if (value === null || value === undefined) return '-'
+  value = value.replaceAll('x', '').replaceAll('X', '').trim()
+  if (value === '' || value === '0' || value === '0.00' || value === 0) return '-'
+  return value + ' X'
 }
 
 export default createStore({
