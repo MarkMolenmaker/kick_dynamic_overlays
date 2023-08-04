@@ -12,9 +12,9 @@ export default{
     ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected', 'max_character_lengths']),
     gridTemplateColumns: function () {
       if (this.showPayout)
-        return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 9}px ${this.max_character_lengths.multi * 9}px ${this.max_character_lengths.payout * 9}px`
+        return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 10}px ${this.max_character_lengths.multi * 9}px ${this.max_character_lengths.payout * 9}px`
       else
-        return `40px 1fr 70px`
+        return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 10}px`
     }
   },
   // watch: {
