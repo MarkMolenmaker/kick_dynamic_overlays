@@ -9,9 +9,12 @@ export default{
     showPayout: { type: Boolean, default: false }
   },
   computed: {
-    ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected']),
+    ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected', 'max_character_lengths']),
     gridTemplateColumns: function () {
-      return this.showPayout ? '40px 1fr 70px 70px 70px' : '40px 1fr 70px'
+      if (this.showPayout)
+        return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 9}px ${this.max_character_lengths.multi * 9}px ${this.max_character_lengths.payout * 9}px`
+      else
+        return `40px 1fr 70px`
     }
   },
   // watch: {
@@ -76,8 +79,8 @@ export default{
             {{ bonus(index).name }}
             <i v-if="bonus(index).suffix">[{{bonus(index).suffix}}]</i></td>
           <td>{{ bonus(index).bet_size }}</td>
-          <td v-if="this.showPayout">{{ bonus(index).multi }}</td>
-          <td v-if="this.showPayout">{{ bonus(index).payout }}</td>
+          <td v-if="this.showPayout">{{ bonus(index).multiplier ? bonus(index).multiplier : '-' }}</td>
+          <td v-if="this.showPayout">{{ bonus(index).payout ? bonus(index).payout : '-' }}</td>
         </tr>
       </tbody>
     </table>
