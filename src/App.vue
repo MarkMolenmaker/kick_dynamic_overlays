@@ -14,7 +14,7 @@ export default {
     this.$store.dispatch('update')
     this.updateInterval = setInterval(() => {
       this.$store.dispatch('update')
-    }, 5000)
+    }, 10000)
   },
   beforeUnmount() { clearInterval(this.updateInterval) }
 }
