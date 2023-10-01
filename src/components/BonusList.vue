@@ -6,7 +6,8 @@ export default{
   data () {
     return {
       scrollInterval: null,
-      presentationList: null
+      presentationList: null,
+      hasScrolled: false
     }
   },
   props: {
@@ -33,17 +34,22 @@ export default{
     // Auto scroll loop
     const wrapper = this.$refs.wrapper
     this.scrollInterval = setInterval(() => {
-      // If the wrapper is the same size as the content, we don't need to scroll
-      if (wrapper.scrollHeight === wrapper.clientHeight) return
+      if (wrapper.scrollHeight === wrapper.clientHeight) return       // If the wrapper is the same size as the content, we don't need to scroll
+      if (this.showActive) {        // Check if we need show the active bonus
+        const visibleRows = Math.floor(wrapper.clientHeight / wrapper.firstElementChild.clientHeight)
+        const centerIndex = Math.floor(visibleRows / 2)         // Center index = the index of the bonus that should be in the center of the wrapper
+        const scrollPosition = wrapper.firstElementChild.clientHeight * (this.slot_selected - 1 - centerIndex)          // Calculate the new scroll position
 
-      // Scroll down 1px
-      wrapper.scrollBy({top: 1, behavior: 'auto'})
-
-      // If we've reached the bottom, move the first child to the end, so we can keep scrolling
-      if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight + 1) {
-        this.presentationList.push(this.presentationList.shift())
+        if (!this.hasScrolled) {
+          wrapper.scrollTo({top: scrollPosition, behavior: 'smooth'})
+          this.hasScrolled = true
+        }
+      } else {
+        wrapper.scrollBy({top: 1, behavior: 'auto'})        // Scroll down 1px
+        if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight + 1) {
+          this.presentationList.push(this.presentationList.shift())   // Move the first bonus to the end of the list
+        }
       }
-
     }, 50)
   },
   beforeUnmount() { clearInterval(this.scrollInterval) },
@@ -60,6 +66,11 @@ export default{
         bonus.index = index
         return bonus
       })
+      this.hasScrolled = false
+    },
+    slot_selected: function (newSlot, oldSlot) {
+      if (newSlot === oldSlot) return
+      this.hasScrolled = false
     }
   }
 }
