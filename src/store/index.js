@@ -68,6 +68,8 @@ export default createStore({
       }, 0);
 
       return obj },
+
+    bonus_list: state => { return state.bonus_list.bonuses },
   },
   mutations: {
   },

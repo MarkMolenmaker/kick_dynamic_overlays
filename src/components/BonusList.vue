@@ -3,13 +3,18 @@ import {mapGetters} from "vuex";
 
 export default{
   name: 'BonusList',
-  data () { return { scrollInterval: null } },
+  data () {
+    return {
+      scrollInterval: null,
+      presentationList: null
+    }
+  },
   props: {
     showActive: { type: Boolean, default: false },
     showPayout: { type: Boolean, default: false }
   },
   computed: {
-    ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected', 'max_character_lengths']),
+    ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected', 'max_character_lengths', 'bonus_list']),
 
     gridTemplateColumns: function () {
       if (this.showPayout)
@@ -18,51 +23,45 @@ export default{
         return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 10}px`
     }
   },
-  // watch: {
-  //   bonus_count: function () {
-  //     location.reload()
-  //   }
-  // },
   mounted () {
+    // The presentation list, is the bonus list, but with its index added as a property
+    this.presentationList = this.bonus_list.map((bonus, index) => {
+      bonus.index = index
+      return bonus
+    })
+
+    // Auto scroll loop
     const wrapper = this.$refs.wrapper
     this.scrollInterval = setInterval(() => {
       // If the wrapper is the same size as the content, we don't need to scroll
       if (wrapper.scrollHeight === wrapper.clientHeight) return
 
-      // // Scroll to selected row in the middle, when opening
-      // if (this.is_opening) {
-      //   if (this.$route.path === '/gambling/widgets/bonus_opening') {
-      //     const index = this.slot_selected
-      //     const rows = wrapper.children.length
-      //     const rowHeight = wrapper.scrollHeight / rows
-      //
-      //     // Get the amount of rows that fit in the visible area
-      //     const visibleRows = Math.floor(wrapper.clientHeight / rowHeight)
-      //     const offsetRows = Math.floor(visibleRows / 2)
-      //
-      //     const position = rowHeight * (index - 1) - offsetRows * rowHeight - 1
-      //
-      //     // If the selected bonus is already on top, we don't need to scroll
-      //     if (wrapper.scrollTop === position) return
-      //     wrapper.scrollTo({top: position, behavior: 'smooth'})
-      //     return
-      //   }
-      // }
-
-
       // Scroll down 1px
       wrapper.scrollBy({top: 1, behavior: 'auto'})
 
       // If we've reached the bottom, move the first child to the end, so we can keep scrolling
-      if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight) {
-        const fragment = document.createDocumentFragment()
-        fragment.appendChild(wrapper.firstElementChild)
-        wrapper.appendChild(fragment)
+      if (Math.floor(wrapper.scrollHeight - wrapper.scrollTop) <= wrapper.clientHeight + 1) {
+        this.presentationList.push(this.presentationList.shift())
       }
 
     }, 50)
   },
-  beforeUnmount() { clearInterval(this.scrollInterval) }
+  beforeUnmount() { clearInterval(this.scrollInterval) },
+  watch: {
+    bonus_list: function (newList, oldList) {
+      if (newList.length === 0) return  // If the new list is empty, don't do anything
+
+      const newListIds = newList.map(bonus => bonus.id)
+      const oldListIds = oldList.map(bonus => bonus.id)
+      if (newListIds.join('') === oldListIds.join('')) return  // If the new list is the same as the old list, don't do anything
+
+      // Overwrite the presentation list with the new list
+      this.presentationList = newList.map((bonus, index) => {
+        bonus.index = index
+        return bonus
+      })
+    }
+  }
 }
 </script>
 
@@ -72,17 +71,17 @@ export default{
         <th>#</th><th class="slot">Slot</th><th>Bet</th><th v-if="this.showPayout">Multi</th><th v-if="this.showPayout">Payout</th>
       </tr>
       <tbody class="wrapper" ref="wrapper">
-        <tr class="bonus" :class="{active: bonus(index).active && this.showActive}"
+        <tr class="bonus" :class="{active: this.slot_selected - 1 === bonus.index && this.showActive}"
             :style="{ gridTemplateColumns: this.gridTemplateColumns }"
-            v-for="index in bonus_count" :key="bonus(index).id">
-          <td>{{ index }}</td>
+            v-for="(bonus) in this.presentationList" :key="bonus.id">
+          <td>{{ bonus.index + 1 }}</td>
           <td class="slot">
-            <i v-if="bonus(index).prefix">[{{bonus(index).prefix}}]</i>
-            {{ bonus(index).name }}
-            <i v-if="bonus(index).suffix">[{{bonus(index).suffix}}]</i></td>
-          <td>{{ bonus(index).bet_size }}</td>
-          <td v-if="this.showPayout">{{ bonus(index).multiplier ? bonus(index).multiplier : '-' }}</td>
-          <td v-if="this.showPayout">{{ bonus(index).payout ? bonus(index).payout : '-' }}</td>
+            <i v-if="bonus.prefix">[{{bonus.prefix}}]</i>
+            {{ bonus.name }}
+            <i v-if="bonus.suffix">[{{bonus.suffix}}]</i></td>
+          <td>{{ bonus.bet_size }}</td>
+          <td v-if="this.showPayout">{{ bonus.multiplier ? bonus.multiplier : '-' }}</td>
+          <td v-if="this.showPayout">{{ bonus.payout ? bonus.payout : '-' }}</td>
         </tr>
       </tbody>
     </table>
