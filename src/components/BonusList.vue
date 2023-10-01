@@ -10,6 +10,7 @@ export default{
   },
   computed: {
     ...mapGetters(['bonus_count', 'bonus', 'is_opening', 'slot_selected', 'max_character_lengths']),
+
     gridTemplateColumns: function () {
       if (this.showPayout)
         return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 10}px ${this.max_character_lengths.multi * 9}px ${this.max_character_lengths.payout * 9}px`
@@ -17,11 +18,11 @@ export default{
         return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 10}px`
     }
   },
-  // watch: {
-  //   bonus_count: function () {
-  //     location.reload()
-  //   }
-  // },
+  watch: {
+    bonus_count: function () {
+      location.reload()
+    }
+  },
   mounted () {
     const wrapper = this.$refs.wrapper
     this.scrollInterval = setInterval(() => {
@@ -47,6 +48,7 @@ export default{
       //     return
       //   }
       // }
+
 
       // Scroll down 1px
       wrapper.scrollBy({top: 1, behavior: 'auto'})
