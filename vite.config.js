@@ -13,5 +13,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  publicPath: '/kick_dynamic_overlays/'
+  base: '/kick_dynamic_overlays/'
 })
