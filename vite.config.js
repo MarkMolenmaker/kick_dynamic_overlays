@@ -12,5 +12,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  publicPath: import.meta.env.PROD
+      ? '/kick_dynamic_overlays/'
+      : '/'
 })
