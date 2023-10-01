@@ -44,9 +44,9 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo VUE_APP_BASE_URL=${{ secrets.VUE_APP_BASE_URL }} >> .env
-          echo VUE_APP_BOTRIX_CHAT_URL=${{ secrets.VUE_APP_BOTRIX_CHAT_URL }} >> .env
-          echo VUE_APP_BOTRIX_ALERTS_URL=${{ secrets.VUE_APP_BOTRIX_ALERTS_URL }} >> .env
+          echo VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }} >> .env
+          echo VITE_BOTRIX_CHAT_WIDGET_URL=${{ secrets.VITE_BOTRIX_CHAT_WIDGET_URL }} >> .env
+          echo VITE_BOTRIX_ALERTS_URL=${{ secrets.VITE_BOTRIX_ALERTS_URL }} >> .env
       - name: Build
         run: npm run build
       - name: Setup Pages
