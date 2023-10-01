@@ -18,11 +18,11 @@ export default{
         return `${this.max_character_lengths.id * 20}px 1fr ${this.max_character_lengths.bet_size * 10}px`
     }
   },
-  watch: {
-    bonus_count: function () {
-      location.reload()
-    }
-  },
+  // watch: {
+  //   bonus_count: function () {
+  //     location.reload()
+  //   }
+  // },
   mounted () {
     const wrapper = this.$refs.wrapper
     this.scrollInterval = setInterval(() => {

@@ -1,7 +1,7 @@
 <script>
 export default {
   name: 'AlertArea',
-  computed: { url () { return process.env.VUE_APP_BOTRIX_ALERTS_URL } },
+  computed: { url () { return import.meta.env.VITE_BOTRIX_ALERTS_URL } },
 }
 
 </script>

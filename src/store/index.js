@@ -73,9 +73,9 @@ export default createStore({
   },
   actions: {
     update({ state }) {
-      axios.get(process.env.VUE_APP_BASE_URL + 'bonus_list')
+      axios.get(import.meta.env.VITE_API_BASE_URL + 'bonus_list')
         .then(response => state.bonus_list = response.data)
-      axios.get(process.env.VUE_APP_BASE_URL + 'current_slot_artwork')
+      axios.get(import.meta.env.VITE_API_BASE_URL + 'current_slot_artwork')
           .then(response => state.current_slot_artwork = response.data)
     }
   },
