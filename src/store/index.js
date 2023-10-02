@@ -12,7 +12,7 @@ export default createStore({
 
     bonus: (state) => {
       return (index) => {
-        return state.bonus_list.bonuses[index - 1]
+        return state.bonus_list.bonuses[index]
       }
     },
     bonus_count: state => { return state.bonus_list.bonuses.length },

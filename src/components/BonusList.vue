@@ -82,17 +82,17 @@ export default{
         <th>#</th><th class="slot">Slot</th><th>Bet</th><th v-if="this.showPayout">Multi</th><th v-if="this.showPayout">Payout</th>
       </tr>
       <tbody class="wrapper" ref="wrapper">
-        <tr class="bonus" :class="{active: this.slot_selected - 1 === bonus.index && this.showActive}"
+        <tr class="bonus" :class="{active: this.slot_selected - 1 === bonuz.index && this.showActive}"
             :style="{ gridTemplateColumns: this.gridTemplateColumns }"
-            v-for="(bonus) in this.presentationList" :key="bonus.id">
-          <td>{{ bonus.index + 1 }}</td>
+            v-for="(bonuz) in this.presentationList" :key="bonuz.id">
+          <td>{{ bonuz.index + 1 }}</td>
           <td class="slot">
-            <i v-if="bonus.prefix">[{{bonus.prefix}}]</i>
-            {{ bonus.name }}
-            <i v-if="bonus.suffix">[{{bonus.suffix}}]</i></td>
-          <td>{{ bonus.bet_size }}</td>
-          <td v-if="this.showPayout">{{ bonus.multiplier ? bonus.multiplier : '-' }}</td>
-          <td v-if="this.showPayout">{{ bonus.payout ? bonus.payout : '-' }}</td>
+            <i v-if="bonuz.prefix">[{{bonuz.prefix}}]</i>
+            {{ bonuz.name }}
+            <i v-if="bonuz.suffix">[{{bonuz.suffix}}]</i></td>
+          <td>{{ bonuz.bet_size }}</td>
+          <td v-if="this.showPayout && bonus(bonuz.index)">{{ bonus(bonuz.index).multiplier ? bonus(bonuz.index).multiplier : '-' }}</td>
+          <td v-if="this.showPayout && bonus(bonuz.index)">{{ bonus(bonuz.index).payout ? bonus(bonuz.index).payout : '-' }}</td>
         </tr>
       </tbody>
     </table>
